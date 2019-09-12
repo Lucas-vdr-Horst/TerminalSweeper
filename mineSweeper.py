@@ -42,7 +42,9 @@ def printField(prtField):
     numberLineHeight = range(height)
     line = "   "
     for w in range(width):
-        line += ' ' + str(numberLineWidth[w]) + ' '
+        line += ' ' + str(numberLineWidth[w])
+        if len(str(numberLineWidth[w])) < 2:
+            line += ' '
     print(line)
     for y in range(len(prtField[0])):
         line = ""
@@ -51,8 +53,10 @@ def printField(prtField):
             if char == 'x':
                 char = ' '
             line += '[' + char + ']'
-        print(' ' + str(numberLineHeight[y]) + ' ' + line)
-
+        strNumberLine = ' ' + str(numberLineHeight[y])
+        if len(str(numberLineHeight[y])) < 2:
+            strNumberLine += ' '
+        print(strNumberLine + line)
 
 def is_number(s):
     try:
@@ -114,7 +118,7 @@ while not gameOver:
         gameOver = True
     else:
         field = minesSerounding(field, checkX, checkY)
-    if(countEmpty(field) == 0):
+    if(countEmpty(field) == 0 and not gameOver):
         printField(field)
         print("You win!")
         gameOver = True
